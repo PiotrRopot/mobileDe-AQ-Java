@@ -1,5 +1,7 @@
-import by.itacademy.piotrropot.mobilede.LoginPage;
-import by.itacademy.piotrropot.mobilede.Steps;
+package by.itacademy.piotrropot.mobilede.ui;
+
+import by.itacademy.piotrropot.mobilede.steps.LoginSteps;
+import by.itacademy.piotrropot.mobilede.pages.LoginPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,14 +11,14 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
 
-import static by.itacademy.piotrropot.mobilede.LoginPage.URL;
+import static by.itacademy.piotrropot.mobilede.pages.BasePage.URL;
 
 public class MobiledeTest {
     WebDriver driver;
-    Steps steps;
+    LoginSteps steps;
 
     @BeforeEach
-    public void initObject() {
+    public void OpenMobilede() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(chromeOptions);
@@ -24,11 +26,11 @@ public class MobiledeTest {
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        steps = new Steps(driver);
+        steps = new LoginSteps(driver);
     }
 
     @Test
-    public void tesLoginWithCorrectData() {
+    public void testLoginWithCorrectData() {
         steps.loginWithCorrectData();
         WebElement user = driver.findElement(By.xpath(LoginPage.INPUT_USER_PROFILE));
         Assertions.assertTrue(user.isDisplayed());
@@ -36,14 +38,14 @@ public class MobiledeTest {
 
     @Test
     public void testLoginIncorrectEmail() {
-        steps.testLoginIncorrectEmail();
+        steps.loginIncorrectEmail();
         Assertions.assertEquals(LoginPage.INPUT_REPEAT,
                 driver.findElement(By.xpath(LoginPage.REPEAT_LOGIN)).getText());
     }
 
     @Test
     public void testLoginWithoutEmail() {
-        steps.testLoginWithoutEmail();
+        steps.loginWithoutEmail();
         Assertions.assertEquals(LoginPage.INPUT_REPEAT,
                 driver.findElement(By.xpath(LoginPage.REPEAT_LOGIN)).getText());
     }
@@ -53,4 +55,3 @@ public class MobiledeTest {
         driver.quit();
     }
 }
-
