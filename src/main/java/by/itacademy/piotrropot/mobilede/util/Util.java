@@ -1,4 +1,4 @@
-package by.itacademy.piotrropot.mobilede;
+package by.itacademy.piotrropot.mobilede.util;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
