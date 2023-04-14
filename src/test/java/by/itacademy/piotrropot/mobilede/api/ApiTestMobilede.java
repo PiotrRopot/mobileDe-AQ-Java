@@ -7,8 +7,9 @@ import static io.restassured.RestAssured.when;
 public class ApiTestMobilede {
     @Test
     public void testOpenMobilede() {
-        String URL = "https://www.mobile.de/ru/";
+        String URL = "https://www.mobile.de/ru";
         when().get(URL)
-                .then().assertThat().statusCode(403);
+                .then()
+                .statusCode(200);
     }
 }
